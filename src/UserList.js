@@ -1,18 +1,11 @@
-import React, { /* useEffect */ } from 'react';
+import React, { useContext /* useEffect */ } from 'react';
+import { UserDispatch } from './App';
 
-const User = React.memo(({ user, onRemove, onToggle }) => {
-  /* useEffect(() => {
-    console.log(user);
-  }); */
-  /* useEffect(() => {
-    console.log('user 값이 설정됨');
-    console.log(user);
-    return () => {
-      console.log('user가 바뀌기 전..');
-      console.log(user);
-    } //cleanup function
-  }, [user] //deps: 의존값이 들어있는 배열
-  ); */
+import { TOGGLE_USER, REMOVE_USER } from './store/actions';
+
+const User = React.memo(({ user }) => {
+  const dispatch = useContext(UserDispatch);
+  
   return (
     <div>
       <b
@@ -20,25 +13,27 @@ const User = React.memo(({ user, onRemove, onToggle }) => {
           cursor: 'pointer',
           color: user.active ? 'green' : 'black'
         }}
-        onClick={() => onToggle(user.id)}
+        onClick={() => {
+          dispatch({ type: TOGGLE_USER, id: user.id })
+        }}
       >
-        {user.username}
+      &nbsp;<span>{user.username}</span>
       </b>
       <span>({user.email})</span>
-      <button onClick={() => onRemove(user.id)}>삭제</button>
+      <button onClick={() => {
+        dispatch({ type: REMOVE_USER, id: user.id })
+      }}>삭제</button>
     </div>
   )
 });
 
-function UserList ({ users, onRemove, onToggle }) {
+function UserList ({ users }) {
   return (
     <div>
       {users.map(user => (
         <User
           user={user}
           key={user.id}
-          onRemove={onRemove}
-          onToggle={onToggle}
         />
       ))}
     </div>
