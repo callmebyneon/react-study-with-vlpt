@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import {
   CHANGE_INPUT,
   RESET_INPUT,
@@ -23,22 +25,39 @@ function reducer(state, action) {
         ...initialState.inputs
       };
     case CREATE_USER:
-      return {
-        inputs: initialState.inputs,
-        users: state.users.concat(action.user)
-      };
+      // with immer
+      return produce(state, draft => {
+        draft.users.push(action.user);
+      });
+      // no immer
+      // return {
+      //   inputs: initialState.inputs,
+      //   users: state.users.concat(action.user)
+      // };
     case TOGGLE_USER:
-      return {
-        ...state,
-        users: state.users.map(user =>
-          user.id === action.id ? { ...user, active: !user.active } : user
-        )
-      };
+      // with immer
+      return produce(state, draft => {
+        const user = draft.users.find(user => user.id === action.id);
+        user.active = !user.active;
+      });
+      // no immer
+      // return {
+      //   ...state,
+      //   users: state.users.map(user =>
+      //     user.id === action.id ? { ...user, active: !user.active } : user
+      //   )
+      // };
     case REMOVE_USER:
-      return {
-        ...state,
-        users: state.users.filter(user => user.id !== action.id)
-      };
+      // with immer
+      return produce(state, draft => {
+        const index = draft.users.findIndex(user => user.id === action.id);
+        draft.users.splice(index, 1);
+      });
+      // no immer
+      // return {
+      //   ...state,
+      //   users: state.users.filter(user => user.id !== action.id)
+      // };
     default:
       return state;
   }
