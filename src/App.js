@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.scss';
 import Button from './components/Button';
-import OutterBox from './components/OutterBox';
 
 function App() {
   return (
-    <OutterBox className="App">
+    <div className="App">
       <div className="buttons">
         <Button size="large" onClick={() => alert('It worked!')}>
           BUTTON
@@ -53,7 +52,7 @@ function App() {
           BUTTON
         </Button>
       </div>
-    </OutterBox>
+    </div>
   );
 }
 
