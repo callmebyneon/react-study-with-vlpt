@@ -1,42 +1,60 @@
-import React, { useReducer, useMemo } from 'react';
-
-import UserList from './UserList';
-import CreateUser from './CreateUser';
-
-import reducer from './reducer';
-import { initialState } from './store/initialState';
-
-
-function countActiveUsers(users) {
-  console.log('활성 사용자 수를 세는중...');
-  return users.filter(user => user.active).length;
-};
-
-export const UserDispatch = React.createContext(null);
+import React from 'react';
+import './App.scss';
+import Button from './components/Button';
+import OutterBox from './components/OutterBox';
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const { users } = state;
-
-  const count = useMemo(() => countActiveUsers(users), [users]);
-
   return (
-    <UserDispatch.Provider value={dispatch}>
-      <CreateUser
-        // username={username}
-        // email={email}
-        // onChange={onChange}
-        // onCreate={onCreate}
-      />
-      <UserList
-        users={users}
-        // onToggle={onToggle}
-        // onRemove={onRemove}
-      />
-      <div>활성사용자 수 : {count}</div>
-    </UserDispatch.Provider>
+    <OutterBox className="App">
+      <div className="buttons">
+        <Button size="large" onClick={() => alert('It worked!')}>
+          BUTTON
+        </Button>
+        <Button>BUTTON</Button>
+        <Button size="small">BUTTON</Button>
+      </div>
+      <div className="buttons">
+        <Button size="large" color="gray">
+          BUTTON
+        </Button>
+        <Button color="gray">BUTTON</Button>
+        <Button size="small" color="gray">
+          BUTTON
+        </Button>
+      </div>
+      <div className="buttons">
+        <Button size="large" color="pink">
+          BUTTON
+        </Button>
+        <Button color="pink">BUTTON</Button>
+        <Button size="small" color="pink">
+          BUTTON
+        </Button>
+      </div>
+      <div className="buttons">
+        <Button size="large" color="blue" outline>
+          BUTTON
+        </Button>
+        <Button color="gray" outline>
+          BUTTON
+        </Button>
+        <Button size="small" color="pink" outline>
+          BUTTON
+        </Button>
+      </div>
+      <div className="buttons">
+        <Button size="large" fullWidth>
+          BUTTON
+        </Button>
+        <Button size="medium" fullWidth color="gray">
+          BUTTON
+        </Button>
+        <Button size="small" fullWidth color="pink">
+          BUTTON
+        </Button>
+      </div>
+    </OutterBox>
   );
-};
+}
 
 export default App;
