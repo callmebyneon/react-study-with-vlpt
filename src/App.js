@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Button from './components/Button';
-import OutterBox from './components/OutterBox';
+import OutterBox from './components/OuterBox';
 
 function App() {
   return (
