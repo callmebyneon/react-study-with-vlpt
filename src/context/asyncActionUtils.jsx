@@ -21,28 +21,24 @@ export function createAsyncDispatcher(type, promiseFn) {
   return actionHandler;
 }
 
-// State Object: initialAsyncState
 export const initialAsyncState = {
   loading: false,
   data: null,
   error: null
 };
 
-// State Object: when loading
-const loadingState = {
+const userLoadingState = {
   loading: true,
   data: null,
   error: null
 };
 
-// Util Function: change state success
 const success = data => ({
   loading: false,
-  data,
+  data, 
   error: null
 });
 
-// Util Function: change state error
 const error = error => ({
   loading: false,
   data: null,
@@ -58,7 +54,7 @@ export function createAsyncHandler(type, key) {
       case type:
         return {
           ...state,
-          [key]: loadingState
+          [key]: userLoadingState
         }
       case SUCCESS:
         return {
