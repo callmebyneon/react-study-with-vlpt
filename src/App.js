@@ -1,22 +1,12 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { Router, Route } from 'react-router-dom';
 
-import Users from './Users';
-import { UsersProvider } from './UsersContext';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: #e9ecef;
-  }
-`;
-
-function App() {
+const App = () => {
   return (
-    <UsersProvider>
-      <GlobalStyle />
-      <Users />
-    </UsersProvider>
+    <Router>
+      <Route />
+    </Router>
   );
-}
+};
 
 export default App;
