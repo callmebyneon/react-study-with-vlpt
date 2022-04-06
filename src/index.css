@@ -17,3 +17,11 @@ code {
 ::placeholder {
   color: #9a9a9a;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
