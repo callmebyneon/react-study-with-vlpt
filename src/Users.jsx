@@ -20,6 +20,7 @@ function Users() {
   const { data: users, error, isLoading, run } = useAsync({
     deferFn: getUsers
   });
+  //* promiseFn vs deferFn :: https://docs.react-async.com/api/options#promisefn
 
   if (isLoading) return <div>loading..</div>;
   if (error) return <div>{error.toString()}</div>;
