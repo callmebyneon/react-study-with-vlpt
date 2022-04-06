@@ -1,25 +1,16 @@
-import axios from 'axios';
-import React from 'react';
-// import useAsync from './hooks/useAsync';
-import { useAsync } from 'react-async';
+import React, { useEffect } from 'react';
+import { useUsersState, useUsersDispatch, getUser } from './UsersContext';
 
-async function getUser({ id }) {
-  const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users/${id}`
-  );
-  return response.data;
-}
+function User({ id }) {
+  const state = useUsersState();
+  const dispatch = useUsersDispatch();
+  useEffect(() => {
+    getUser(dispatch, id);
+  }, [dispatch, id]);
+  
+  const { data: user, loading, error } = state.user;
 
-function Use({ id }) {
-  // const [state] = useAsync(() => getUser(id), [id]);
-  // const { loading, data: user, error } = state;
-  const { data: user, error, isLoading } = useAsync({
-    promiseFn: getUser,
-    id,
-    watch: id
-  });
-
-  if (isLoading) return <div>loading..</div>;
+  if (loading) return <div>loading..</div>;
   if (error) return <div>{error.toString()}</div>;
   if (!user) return null;
   
@@ -29,12 +20,11 @@ function Use({ id }) {
       <i>({user.name})</i>
       <p>
         <b>Email:</b> {user.email}
-      </p>
-      <p>
+        <br />
         <b>Website:</b> <a href={user.website} target="_black">{user.website}</a>
       </p>
     </div>
   );
 }
 
-export default Use;
+export default User;
