@@ -1,33 +1,49 @@
 import React from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease, setDiff } from '../module/counter';
 
-const CounterContainer = () => {
-  // const { number, diff } = useSelector(state => state.counter)
-  const { number, diff } = useSelector(
-    state => ({
-      number: state.counter.number,
-      diff: state.counter.diff
-    }),
-    shallowEqual
-  );
-  
-  const dispatch = useDispatch();
-  const onIncrease = () => dispatch(increase());
-  const onDecrease = () => dispatch(decrease());
-  const onSetDiff = diff => dispatch(setDiff(diff));
-  
-  
+const CounterContainer = ({ number, diff, increase, decrease, setDiff }) => {
   return (
     <Counter
       number={number}
       diff={diff}
-      onIncrease={onIncrease}
-      onDecrease={onDecrease}
-      onSetDiff={onSetDiff}
+      onIncrease={increase}
+      onDecrease={decrease}
+      onSetDiff={setDiff}
     />
   );
-}
+};
 
-export default CounterContainer;
+// mapStateToProps
+/* const mapStateToProps = state => ({
+  number: state.counter.number,
+  diff: state.counter.diff
+}); */
+
+//mapDispatchToProps
+/* const mapDispatchToProps = {
+  increase,
+  decrease,
+  setDiff
+}; */
+/* const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      increase,
+      decrease,
+      setDiff
+    },
+    dispatch
+  ); */
+
+export default connect(
+  state => state.counter, //mapStateToProps
+  { increase, decrease, setDiff } //mapDispatchToProps
+)(CounterContainer);
+
+/* 위 코드는 다음과 동일합니다.
+  const enhance = connect(mapStateToProps, mapDispatchToProps);
+  export defualt enhance(CounterContainer);
+*/
