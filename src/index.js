@@ -7,22 +7,13 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './module';
 
-const store = createStore(rootReducer);
-// console.log(store.getState());
-// > JSON.stringify(store.getState(), null, 2)
-// {
-//   "counter": {
-//     "number": 0,
-//     "diff": 1
-//   },
-//   "todos": [
-//     {
-//       "id": 1,
-//       "text": "example",
-//       "done": false
-//     }
-//   ]
-// }
+import { composeWithDevTools } from '@redux-devtools/extension';
+/** (redux-devtools-extension) Package moved to @redux-devtools/extension.
+ * Chrome extension: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+ * npm (@redux-devtools/extension): https://www.npmjs.com/package/@redux-devtools/extension
+ */
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 const container = document.getElementById('root');
 const root = createRoot(container);
