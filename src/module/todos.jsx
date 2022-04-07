@@ -9,15 +9,13 @@ let nextId = 1;
 export const addTodo = text => ({
   type: ADD_TODO,
   todo: {
-    id: nextId++,
+    id: ++nextId,
     text
   }
 });
 export const toggleTodo = id => ({
   type: TOGGLE_TODO,
-  todo: {
-    id
-  }
+  id
 });
 
 //* DECLARATION initial state
