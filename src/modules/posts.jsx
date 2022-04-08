@@ -1,11 +1,12 @@
 import * as postsAPI from '../api/posts';
 import {
-  createPromiseThunk,
   reducerUtils,
   handleAsyncActions,
-  createPromiseThunkById,
-  handleAsyncActionsById
+  handleAsyncActionsById,
+  createPromiseSaga,
+  createPromiseSagaById
 } from '../lib/asyncUtils';
+import { takeEvery } from 'redux-saga/effects';
 
 
 
@@ -21,29 +22,40 @@ const GET_POST_ERROR = 'GET_POST_ERROR';
 
 
 //************* thunk functions
-export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts);
-export const getPost = createPromiseThunkById(GET_POST, postsAPI.getPostById);
+export const getPosts = () => ({ type: GET_POSTS });
+export const getPost = id => ({ type: GET_POST, payload: id, meta: id });
+
+const getPostsSage = createPromiseSaga(GET_POSTS, postsAPI.getPosts);
+
+const getPostSaga = createPromiseSagaById(GET_POST, postsAPI.getPostById);
+
+// MERGE saga
+export function* postsSaga() {
+  yield takeEvery(GET_POSTS, getPostsSage);
+  yield takeEvery(GET_POST, getPostSaga);
+}
 
 // This will be use with <unstable_HistoryRouter /> in react-router@6
+// we can use value from `withExtraArgument` by third param: { history }
 export const goToHome = () => (dispatch, getState, { history }) => {
   history.push('/');
 
   console.log(getState());
-  /* return 'state': { counter: {...}, posts: {...} } */
+  // { counter: {...}, posts: {...} }: (state)
   
   console.log(history);
-  /* {
-    createHref: f(to),
-    push: f(to, state),
-    replace: f(to, state),
-    go: f(delta),
-    foward: f,
-    back: f,
-    block: f(blocker),
-    listen: f(listener),
-    location: locationObject,
-    action: latestAction
-  } */
+  // {
+  //   createHref: f(to),
+  //   push: f(to, state),
+  //   replace: f(to, state),
+  //   go: f(delta),
+  //   foward: f,
+  //   back: f,
+  //   block: f(blocker),
+  //   listen: f(listener),
+  //   location: locationObject,
+  //   action: latestAction
+  // }
 
 }
 
