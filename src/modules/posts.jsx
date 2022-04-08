@@ -24,6 +24,29 @@ const GET_POST_ERROR = 'GET_POST_ERROR';
 export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts);
 export const getPost = createPromiseThunkById(GET_POST, postsAPI.getPostById);
 
+// This will be use with <unstable_HistoryRouter />in react-router@6
+export const goToHome = () => (dispatch, getState, { history }) => {
+  history.push('/');
+
+  console.log(getState());
+  /* return 'state': { counter: {...}, posts: {...} } */
+  
+  console.log(history);
+  /* {
+    createHref: f(to),
+    push: f(to, state),
+    replace: f(to, state),
+    go: f(delta),
+    foward: f,
+    back: f,
+    block: f(blocker),
+    listen: f(listener),
+    location: locationObject,
+    action: latestAction
+  } */
+
+}
+
 
 
 

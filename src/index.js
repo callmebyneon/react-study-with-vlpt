@@ -9,13 +9,24 @@ import { Provider } from 'react-redux';
 import rootReducer from './modules';
 import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
-import { BrowserRouter } from 'react-router-dom';
+import {
+  BrowserRouter,
+  // unstable_HistoryRouter as HistoryRouter,
+} from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import { composeWithDevTools } from '@redux-devtools/extension';
 
+const customHistory = createBrowserHistory();
+
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+  composeWithDevTools(
+    applyMiddleware(
+      ReduxThunk.withExtraArgument({ history: customHistory }),
+      logger
+    )
+  )
 );
 
 const container = document.getElementById('root');
