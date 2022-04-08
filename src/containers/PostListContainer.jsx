@@ -12,7 +12,7 @@ const PostListContainer = () => {
     dispatch(getPosts());
   }, [dispatch]);
   
-  if (loading) return <div>Now loading ...</div>;
+  if (loading && !data) return <div>Now loading ...</div>;
   if (error) return <div>{error.toString()}</div>;
   if (!data) return null;
   

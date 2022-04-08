@@ -1,4 +1,4 @@
-// Function to make thunk by promise
+//* Function to make thunk by promise
 export const createPromiseThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
@@ -17,9 +17,32 @@ export const createPromiseThunk = (type, promiseCreator) => {
   // 예: writeComment({ postId: 1, text: 'content...' });
 };
 
+const defaultIdSelector = param => param;
+export const createPromiseThunkById = (
+  type,
+  promiseCreator,
+  
+  // idSelector: This function define the rule to select id in params.
+  //             If the parameter looks like object, return like this one: param => param.id
+  idSelector = defaultIdSelector
+) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+
+  return param => async dispatch => {
+    const id = idSelector(param);
+    dispatch({ type, meta: id });
+    try {
+      const payload = await promiseCreator(param);
+      dispatch({ type: SUCCESS, payload, meta: id });
+    } catch (e) {
+      dispatch({ type: ERROR, error: true, payload: e, meta: id });
+    }
+  }
+}
 
 
-// Utils for reducer
+
+//* Utils for reducer
 export const reducerUtils = {
   // 초기 상태
   initial: (initialData = null) => ({
@@ -52,15 +75,15 @@ export const reducerUtils = {
 
 
 
-// Reducer to handle async actions
-export const handleAsyncActions = (type, key) => {
+//* Reducer to handle async actions
+export const handleAsyncActions = (type, key, keepData = false) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
   return (state, action) => {
     switch (action.type) {
       case type:
         return {
           ...state,
-          [key]: reducerUtils.loading()
+          [key]: reducerUtils.loading(keepData ? state[key].data : null)
         }
       case SUCCESS:
         return {
@@ -77,3 +100,39 @@ export const handleAsyncActions = (type, key) => {
     }
   }
 }
+
+export const handleAsyncActionsById = (type, key, keepData = false) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return (state, action) => {
+    const id = action.meta;
+    switch (action.type) {
+      case type:
+        return {
+          ...state,
+          [key]: {
+            ...state[key],
+            [id]: reducerUtils.loading(
+              keepData ? (state[key][id] && state[key][id]) : null
+            )
+          }
+        }
+      case SUCCESS:
+        return {
+          ...state,
+          [key]: {
+            ...state[key],
+            [id]: reducerUtils.success(action.payload)
+          }
+        }
+      case ERROR:
+        return {
+          ...state,
+          [key]: {
+            ...state[key],
+            [id]: reducerUtils.error(action.error)
+          }
+        }
+      default: return state;
+    }
+  };
+};
