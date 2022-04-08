@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPost, /* goToHome */ } from '../modules/posts'; /* goToHome */
+import { getPost, goToHome } from '../modules/posts';
 import Post from '../components/Post';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-const goToHome = (state, navigate) => {
-  console.log(`%c ${JSON.stringify(state, null, 2)}`, 'background-color:#202124;color:yellow;');
-  navigate('/')
-}
+// const goToHome = (state, navigate) => {
+//   console.log(`%c ${JSON.stringify(state, null, 2)}`, 'background-color:#202124;color:yellow;');
+//   navigate('/')
+// }
 
 const PostContainer = ({ postId }) => {
-  const navigate = useNavigate();
-  const state = useSelector(state => state.posts);
+  // const navigate = useNavigate();
+  // const state = useSelector(state => state.posts);
   const { data, loading, error } = useSelector(
     state => state.posts.post[postId]
   ) || {
@@ -32,7 +32,7 @@ const PostContainer = ({ postId }) => {
   
   return (
     <>
-      <button onClick={() => goToHome(state, navigate)}>home</button>
+      <button onClick={() => dispatch(goToHome())}>home</button>
       <Post post={data} />
     </>
   );

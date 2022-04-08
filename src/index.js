@@ -9,10 +9,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './modules';
 import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
-import {
-  BrowserRouter,
-  // unstable_HistoryRouter as HistoryRouter,
-} from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import { composeWithDevTools } from '@redux-devtools/extension';
@@ -33,9 +30,9 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
+  <HistoryRouter history={customHistory}>
     <Provider store={store}>
       <App />
     </Provider>
-  </BrowserRouter>
+  </HistoryRouter>
 );
