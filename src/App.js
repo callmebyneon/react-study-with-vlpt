@@ -1,13 +1,18 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import CounterContainer from './containers/CounterContainer';
-import TodosContainer from './containers/TodosContainer';
+import PostListPage from './pages/PostListPage';
+import PostPage from './pages/PostPage';
 
 const App = () => {
   return (
-    <div>
+    <div className="box">
       <CounterContainer />
       <hr />
-      <TodosContainer />
+      <Routes>
+        <Route path="/" element={<PostListPage />} />
+        <Route path="/:id" element={<PostPage />} />
+      </Routes>
     </div>
   );
 };
