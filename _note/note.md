@@ -279,3 +279,123 @@
       - `takeLatest`: 특정 액션 타입에 대해 디스패치된 가장 마지막 액션만을 처리
     - `getContext`: saga 컨텍스트의 특정 속성 반환
     - ...
+
+---
+
+## + Typescript
+
+### tsconfig.json
+
+- _Example_
+  - "compileOptions":
+    - "target": "es5", // 컴파일된 코드가 실행될 환경
+    - "module": "commonjs", // 컴파일된 사용할 모듈 시스템
+    - "strict": true, // 모든 타입 체킹 활성화 여부
+    - "exModuleInterop": true, // [(참고)](https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file)
+    - "outDir": "./dist" // 컴파일된 파일 저장 경로
+- 타입 정의
+
+  ```ts
+  // 기본 타입
+  const msg: string = 'Hello World!';
+  const done: boolean = false;
+  const numbers: number[] = [1, 2, 3];
+  const messages: string[] = ['hello', 'world'];
+  let mightBeUndefined: string | undefined = undefined;
+  let nullableNumber: number | null = null;
+  let color: 'red' | 'orange' | 'yellow' = 'red';
+
+  // 함수에서 타입 정의
+  function sum(x: number, y: number): number {
+    return x + y;
+  }
+  function sumArray(numbers: number[]): number {
+    return numbers.reduce((acc, current) => acc + current, 0);
+  }
+  function returnNothing(): void {
+    console.log("I'm just saying hello world");
+  }
+  ```
+
+- 인터페이스로 일반 객체 타입 정의
+
+  ```ts
+  interface Person {
+    name: string;
+    age?: number;
+  }
+  interface Developer extends Person {
+    skills: string[];
+  }
+
+  const person: Person = {
+    name: 'persona',
+    age: 20
+  }
+
+  const export: Developer = {
+    name: 'developer',
+    skills: ['javascript', 'react']
+  }
+
+  type People = Person[]; // Type Alias 사용
+  const people: People = [person, expert];
+  ```
+
+- Generics
+
+  - 제너릭(Generics)은 타입스크립트에서 함수, 클래스, interface, type alias 를 사용하게 될 때 여러 종류의 타입에 대해 호환을 맞춰야하는 상황에서 사용
+
+  ```ts
+  // like in this case,
+  function merge(a: any, b: any): any {
+    return { ...a, ...b };
+  }
+  // we can use like this.
+  function merge<A, B>(a: A, b: B): A & B {
+    return { ...a, ...b };
+  }
+
+  function wrap<T>{param: T} {
+    return { param }
+  }
+  ```
+
+  ```ts
+  // ...
+  // use in interface,
+  interface Items<T> {
+    list: T[];
+  }
+  const items: Items<string> = {
+    list: ['a', 'b', 'c'],
+  };
+  ```
+
+  ```ts
+  // ...
+  // use in type,
+  type Items<T> = {
+    list: T[];
+  };
+  const items: Items<string> = {
+    list: ['a', 'b', 'c'],
+  };
+  ```
+
+  ```ts
+  // ...
+  // use in class
+  class Queue<T> {
+    list: t[] = [];
+    get length() {
+      return this.list.length;
+    }
+    enqueue(item: T) {
+      this.list.push(item);
+    }
+    dequeue() {
+      return this.list.shift();
+    }
+  }
+  ```
