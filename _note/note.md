@@ -156,6 +156,8 @@
 - [React Context](https://ko.reactjs.org/docs/context.html)
 - [예제](https://react.vlpt.us/basic/22-context-dispatch.html)
 
+[↑ Go to Top](#contents)
+
 ---
 
 ## 🔽 라우터 _react-router_
@@ -171,6 +173,8 @@
 | props `history`                  | [`useNavigate()`](https://reactrouter.com/docs/en/v6/api#usenavigate)                       | returns a Function                                                                                           |
 | read and modify the query string | [`useSearchParams()`](https://reactrouter.com/docs/en/v6/api#usesearchparams)               | \[[URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams), SetURLSearchParams\] |
 | provide customHistory            | [`<unstable_HistoryRouter>`](https://reactrouter.com/docs/en/v6/api#unstable_historyrouter) |                                                                                                              |
+
+[↑ Go to Top](#contents)
 
 ---
 
@@ -303,6 +307,8 @@
       - `takeLatest`: 특정 액션 타입에 대해 디스패치된 가장 마지막 액션만을 처리
     - `getContext`: saga 컨텍스트의 특정 속성 반환
     - ...
+
+[↑ Go to Top](#contents)
 
 ---
 
@@ -446,3 +452,7 @@
 ### In CodeSandbox
 
 [CondeSandbox에서 8장 실습코드 확인](https://codesandbox.io/s/react-study-with-vlpt--typescript-oxe7q3?file=/src/App.tsx)
+
+---
+
+[↑ Go to Top](#contents)
