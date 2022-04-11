@@ -2,6 +2,30 @@
 
 > Study notes and keywords memos
 
+### Contents
+
+- [React](#🔽-react)
+  - [JSX](#jsx)
+  - [컴포넌트 프로퍼티 _Componenet props_](#컴포넌트-프로퍼티-component-propsproperties)
+  - [리액트 훅 _React Hooks_](#리액트-훅-react-hooks)
+  - [고차 컴포넌트 _React.memo_](#고차-컴포넌트-reactmemo)
+  - [Context API](#context-api)
+- [라우터](#🔽-라우터-react-router)
+  - [v6](#v6)
+- [상태관리](#🔽-상태관리)
+  - [액션 _Action_](#액션-action)
+  - [액션 생성함수 _Action Creator_](#액션-생성함수-action-creator)
+  - [리듀서 _Reducer_](#리듀서-reducer)
+  - [스토어 _Store_](#스토어-store)
+  - [디스패치 _Dispatch_](#디스패치-dispatch)
+  - [구독 _Subscribe_](#구독-subscribe)
+  - [about Redux](#about-redux)
+  - [Redux Middleware](#redux-middleware)
+- [Typescript+](#typescript)
+  - [install typescript with CRA](#install-typescript-with-cra)
+  - [tsconfig.json](#tsconfigjson)
+  - [In CodeSandbox](#in-codesandbox)
+
 ---
 
 ## 🔽 React
@@ -136,7 +160,7 @@
 
 ## 🔽 라우터 _react-router_
 
-### [@6](https://reactrouter.com/docs/en/v6/api#reference)
+### [v6](https://reactrouter.com/docs/en/v6/api#reference)
 
 | before                           | after                                                                                       | return                                                                                                       |
 | -------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -282,23 +306,45 @@
 
 ---
 
-## + Typescript
+## Typescript+
+
+### install typescript with CRA
+
+- [참고 문서](https://create-react-app.dev/docs/adding-typescript/#installation)
+
+- 타입스크립트 설정이 적용된 프로젝트 생성
+
+  ```shell
+  npx create-react-app my-app --template typescript
+  ```
+
+  ```shell
+  yarn create react-app my-app --template typescript
+  ```
+
+- 생성된 파일에 타입스트립트 설치
+
+  ```shell
+  npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+  ```
+
+  ```shell
+  yarn add typescript @types/node @types/react @types/react-dom @types/jest
+  ```
 
 ### tsconfig.json
 
 - _Example_
-  - "compileOptions":
-    - "target": "es5", // 컴파일된 코드가 실행될 환경
-    - "module": "commonjs", // 컴파일된 사용할 모듈 시스템
-    - "strict": true, // 모든 타입 체킹 활성화 여부
-    - "exModuleInterop": true, // [(참고)](https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file)
-    - "outDir": "./dist" // 컴파일된 파일 저장 경로
+  - `"compileOptions":`
+    - `"target": "es5",` -------------- 컴파일된 코드가 실행될 환경
+    - `"module": "commonjs",` ------- 컴파일에 사용할 모듈 시스템
+    - `"strict": true,` --------------- 모든 타입 체킹 활성화 여부
+    - `"exModuleInterop": true,` --- [(참고)](https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file)
+    - `"outDir": "./dist"` ----------- 컴파일된 파일 저장 경로
 - 타입 정의
 
   ```ts
   // 기본 타입
-  const msg: string = 'Hello World!';
-  const done: boolean = false;
   const numbers: number[] = [1, 2, 3];
   const messages: string[] = ['hello', 'world'];
   let mightBeUndefined: string | undefined = undefined;
@@ -306,9 +352,6 @@
   let color: 'red' | 'orange' | 'yellow' = 'red';
 
   // 함수에서 타입 정의
-  function sum(x: number, y: number): number {
-    return x + y;
-  }
   function sumArray(numbers: number[]): number {
     return numbers.reduce((acc, current) => acc + current, 0);
   }
@@ -399,3 +442,7 @@
     }
   }
   ```
+
+### In CodeSandbox
+
+[CondeSandbox에서 8장 실습코드 확인](https://codesandbox.io/s/react-study-with-vlpt--typescript-oxe7q3?file=/src/App.tsx)
