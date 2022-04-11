@@ -36,7 +36,7 @@
 - [사용 규칙](https://ko.reactjs.org/docs/hooks-rules.html)
   - **최상위에서만(at the top level)** 호출되어야 하고 반복문, 조건문, 중첩된 함수 내에서 실행되어선 안된다.
   - 일반 JavaScript 함수 등이 아닌, **React 함수 컴포넌트 내** (혹은 custom Hook 내)에서만 호출해야 함.
-- [hooks reference](https://ko.reactjs.org/docs/hooks-reference.html)
+- [**hooks reference**](https://ko.reactjs.org/docs/hooks-reference.html)
 
   - useState (State Hook)
     - 현재의 `state`값과 이 값을 업데이트 하는 함수 쌍으로 이루어진 배열을 반환
@@ -128,7 +128,7 @@
 
 ### Context API
 
-- 리액트 컴포넌트 트리 안에서 전역적으로 데이터(예: 로그인한 유저, 테모, 언어)를 공유할 수 있도록 만들어짐.
+- 리액트 컴포넌트 트리 안에서 전역적으로 데이터(예: 로그인한 유저, 테마, 언어)를 공유할 수 있도록 만들어짐.
 - [React Context](https://ko.reactjs.org/docs/context.html)
 - [예제](https://react.vlpt.us/basic/22-context-dispatch.html)
 
@@ -209,7 +209,7 @@
     1. 프로미스가 시작/성공/실패했을 때 다른 액션을 디스패치
     2. 각 프로미스마다 thunk 함수 생성
     3. 리듀서에서 액션에 따라 로딩중/결과/에러 상태를 변경
-- Hooks
+- **Hooks**
 
   - [`useSelector`](https://react-redux.js.org/api/hooks#useselector)
 
@@ -242,7 +242,7 @@
 - 리덕스에서의 주된 사용 용도는 API 연동과 같은 비동기 작업 처리를 위함.
 - 비동기 작업에 관련된 미들웨어 라이브러리: [`redux-thunk`](https://github.com/reduxjs/redux-thunk), [`redux-saga`](https://github.com/redux-saga/redux-saga), [`redux-observable`](https://redux-observable.js.org/), [`redux-promise-middleware`](https://www.npmjs.com/package/redux-promise-middleware)
 - browser extension과 함께 사용할 때는 [extension’s options](https://www.npmjs.com/package/@redux-devtools/extension) 참고
-- redux-logger
+- **redux-logger**
 
   - action 발생 시 콘솔에 로깅.
   - `createStore `를 통해 스토어 생성시 `react-logger`의 `logger` 사용하는 경우, `logger`가 가장 마지막에 와야함.
@@ -257,13 +257,13 @@
     ...
     ```
 
-- redux-thunk
+- **redux-thunk**
   - 함수를 디스패치 할 수 있게 해주는 미들웨어.
-- redux-saga
+- **redux-saga**
   - 액션을 모니터링하다가 특정 액션이 발생하면 이에 따라 특정 작업을 하도록 사용.
   - 비동기 작업 시 기존 요청을 취소 처리하거나 특정 액션 발생 시 다른 액션 디스패치 처리 혹은 JS 코드 실행, API 요청 실패 시 재요청 등
   - [Gernerator 문법](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Generator) 시용 (`function*`)
-  - effects (util functions `from 'react-saga/effects'`)
+  - **effects** (util functions `from 'react-saga/effects'`)
     - `all`: 배열 안의 여러 사가를 동시에 실행.
       ```jsx
       yield all([counterSaga(), postsSaga()]);
