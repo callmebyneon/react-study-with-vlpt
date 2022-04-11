@@ -336,11 +336,11 @@
 
 - _Example_
   - `"compileOptions":`
-    - `"target": "es5",` -------------- 컴파일된 코드가 실행될 환경
+    - `"target": "es5",` ------------- 컴파일된 코드가 실행될 환경
     - `"module": "commonjs",` ------- 컴파일에 사용할 모듈 시스템
-    - `"strict": true,` --------------- 모든 타입 체킹 활성화 여부
+    - `"strict": true,` -------------- 모든 타입 체킹 활성화 여부
     - `"exModuleInterop": true,` --- [(참고)](https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file)
-    - `"outDir": "./dist"` ----------- 컴파일된 파일 저장 경로
+    - `"outDir": "./dist"` ---------- 컴파일된 파일 저장 경로
 - 타입 정의
 
   ```ts
