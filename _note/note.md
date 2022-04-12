@@ -2,7 +2,7 @@
 
 > Study notes and keywords memos
 
-### Contents
+### Table of Contents
 
 - [React](#🔽-react)
   - [JSX](#jsx)
